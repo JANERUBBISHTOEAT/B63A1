@@ -1,0 +1,6 @@
+*.zip
+*.fdb_latexmk
+*.aux
+.gitignore
+*.log
+*.fls
