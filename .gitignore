@@ -1,6 +1,7 @@
 *.zip
 *.fdb_latexmk
 *.aux
-.gitignore
 *.log
 *.fls
+*.out
+*.gz
