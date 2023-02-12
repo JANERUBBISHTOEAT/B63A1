@@ -149,17 +149,15 @@ $ \text{where} \ \phi \text{ is the golden ratio.} $
 \text{On an initially empty tree, show each step of inserting the keys 9, 10, 12, 14, 3, 34, 19, 37, 20. }
 
 \paragraph{Step 1: Insert 9 \\}
-% binary tree
 \begin{tikzpicture}[every node/.style={draw,circle,minimum size=3ex}]
     \node (root) {9};
 \end{tikzpicture}
 
 \paragraph{Step 2: Insert 10 \\}
-% binary tree
 \begin{tikzpicture}[%level distance=5mm,
         level 1/.style={level distance=10mm,sibling distance=24mm},
         level 2/.style={level distance=10mm,sibling distance=16mm},
-        level 3/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
     \node {9}
@@ -171,7 +169,7 @@ $ \text{where} \ \phi \text{ is the golden ratio.} $
 \begin{tikzpicture}[%level distance=5mm,
         level 1/.style={level distance=10mm,sibling distance=24mm},
         level 2/.style={level distance=10mm,sibling distance=16mm},
-        level 3/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
     \node {9}
@@ -180,131 +178,334 @@ $ \text{where} \ \phi \text{ is the golden ratio.} $
             child [missing] % level 2
             child   {node {12}}};
 \end{tikzpicture}
+\\
+Imbalanced. Right heavy. \\
+Need a left rotation. \\
+Left rotation: \\\\
+\begin{tikzpicture}[%level distance=5mm,
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node {10}
+    child   {node {9}}
+    child   {node {12}};
+\end{tikzpicture}
 
 \paragraph{Step 4: Insert 14 \\}
 \begin{tikzpicture}[%level distance=5mm,
         level 1/.style={level distance=10mm,sibling distance=24mm},
         level 2/.style={level distance=10mm,sibling distance=16mm},
-        level 3/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
-    \node {9}
-    child [missing] % left child
-    child   {node {10} % right child
-            child [missing] % level 2
-            child   {node {12} % level 2
-                    child [missing] % level 3
-                    child   {node {14}}}};
+    \node {10}
+    child   {node {9}}
+    child   {node {12}
+            child [missing]
+            child   {node {14}}};
 \end{tikzpicture}
 
 \paragraph{Step 5: Insert 3 \\}
 \begin{tikzpicture}[%level distance=5mm,
         level 1/.style={level distance=10mm,sibling distance=24mm},
         level 2/.style={level distance=10mm,sibling distance=16mm},
-        level 3/.style={level distance=10mm,sibling distance=12mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
-    \node {9}
-    child   {node {3} % left child
-        }
-    child   {node {10} % right child
-            child [missing] % level 2
-            child   {node {12} % level 2
-                    child [missing] % level 3
-                    child   {node {14}}}};
+    \node {10}
+    child   {node {9}
+            child   {node {3}}
+            child [missing]}
+    child   {node {12}
+            child [missing]
+            child   {node {14}}};
 \end{tikzpicture}
 
 \paragraph{Step 6: Insert 34 \\}
 \begin{tikzpicture}[%level distance=5mm,
         level 1/.style={level distance=10mm,sibling distance=24mm},
         level 2/.style={level distance=10mm,sibling distance=16mm},
-        level 3/.style={level distance=10mm,sibling distance=12mm},
-        level 4/.style={level distance=10mm,sibling distance=8mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
+        level 4/.style={level distance=8mm,sibling distance=4mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
-    \node {9}
-    child   {node {3} % left child
-        }
-    child   {node {10} % right child
-            child [missing] % level 2
-            child   {node {12} % level 2
-                    child [missing] % level 3
-                    child   {node {14} % level 3
-                            child [missing] % level 4
-                            child   {node {34}}}}};
+    \node {10}
+    child   {node {9}
+            child   {node {3}}
+            child [missing]}
+    child   {node {12}
+            child [missing]
+            child   {node {14}
+                    child [missing]
+                    child   {node {34}}}};
+\end{tikzpicture}
+\\
+Imbalanced. Right heavy. \\
+Need a left rotation. \\
+Left rotation: \\\\
+\begin{tikzpicture}[%level distance=5mm,
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node {10}
+    child   {node {9}
+            child   {node {3}}
+            child [missing]}
+    child   {node {14}
+            child   {node {12}}
+            child   {node {34}}};
 \end{tikzpicture}
 
 \paragraph{Step 7: Insert 19 \\}
 \begin{tikzpicture}[%level distance=5mm,
         level 1/.style={level distance=10mm,sibling distance=24mm},
         level 2/.style={level distance=10mm,sibling distance=16mm},
-        level 3/.style={level distance=10mm,sibling distance=12mm},
-        level 4/.style={level distance=10mm,sibling distance=8mm},
-        level 5/.style={level distance=8mm,sibling distance=6mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
+        level 4/.style={level distance=8mm,sibling distance=4mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
-    \node {9}
-    child   {node {3} % left child
-        }
-    child   {node {10} % right child
-            child [missing] % level 2
-            child   {node {12} % level 2
-                    child [missing] % level 3
-                    child   {node {14} % level 3
-                            child [missing] % level 4
-                            child   {node {34} % level 4
-                                    child   {node {19}} % level 5
-                                    child   [missing]}}}};
+    \node {10}
+    child   {node {9}
+            child   {node {3}}
+            child [missing]}
+    child   {node {14}
+            child   {node {12}}
+            child   {node {34}
+                    child   {node {19}}
+                    child [missing]}};
 \end{tikzpicture}
 
 \paragraph{Step 8: Insert 37 \\}
 \begin{tikzpicture}[%level distance=5mm,
         level 1/.style={level distance=10mm,sibling distance=24mm},
         level 2/.style={level distance=10mm,sibling distance=16mm},
-        level 3/.style={level distance=10mm,sibling distance=12mm},
-        level 4/.style={level distance=10mm,sibling distance=8mm},
-        level 5/.style={level distance=8mm,sibling distance=6mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
+        level 4/.style={level distance=8mm,sibling distance=4mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
-    \node {9}
-    child   {node {3} % left child
-        }
-    child   {node {10} % right child
-            child [missing] % level 2
-            child   {node {12} % level 2
-                    child [missing] % level 3
-                    child   {node {14} % level 3
-                            child [missing] % level 4
-                            child   {node {34} % level 4
-                                    child   {node {19}} % level 5
-                                    child   {node {37}}}}}};
+    \node {10}
+    child   {node {9}
+            child   {node {3}}
+            child [missing]}
+    child   {node {14}
+            child   {node {12}}
+            child   {node {34}
+                    child   {node {19}}
+                    child   {node {37}}}};
 \end{tikzpicture}
 
 \paragraph{Step 9: Insert 20 \\}
 \begin{tikzpicture}[%level distance=5mm,
         level 1/.style={level distance=10mm,sibling distance=24mm},
         level 2/.style={level distance=10mm,sibling distance=16mm},
-        level 3/.style={level distance=10mm,sibling distance=12mm},
-        level 4/.style={level distance=10mm,sibling distance=8mm},
-        level 5/.style={level distance=8mm,sibling distance=6mm},
-        level 6/.style={level distance=8mm,sibling distance=6mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
+        level 4/.style={level distance=8mm,sibling distance=4mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
-    \node {9}
-    child   {node {3} % left child
-        }
-    child   {node {10} % right child
-            child [missing] % level 2
-            child   {node {12} % level 2
-                    child [missing] % level 3
-                    child   {node {14} % level 3
-                            child [missing] % level 4
-                            child   {node {34} % level 4
-                                    child   {node {19} % level 5
-                                            child [missing] % level 6
-                                            child  {node {20}}} % level 6
-                                    child   {node {37}}}}}};
+    \node {10}
+    child   {node {9}
+            child   {node {3}}
+            child [missing]}
+    child   {node {14}
+            child   {node {12}}
+            child   {node {34}
+                    child   {node {19}
+                            child [missing]
+                            child   {node {20}}}
+                    child   {node {37}}}};
 \end{tikzpicture}
+\\
+Imbalanced. Right heavy. \\
+Need a double rotation. \\
+1. Right rotation: \\\\
+\begin{tikzpicture}[%level distance=5mm,
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
+        level 4/.style={level distance=6mm,sibling distance=6mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node {10}
+    child   {node {9}
+            child   {node {3}}
+            child [missing]}
+    child   {node {14}
+            child   {node {12}}
+            child   {node {19}
+                    child [missing]
+                    child   {node {34}
+                            child {node {20}}
+                            child   {node {37}}}}};
+\end{tikzpicture}
+\\
+2. Left rotation: \\\\
+\begin{tikzpicture}[%level distance=5mm,
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=8mm,sibling distance=8mm},
+        level 4/.style={level distance=6mm,sibling distance=6mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node {10}
+    child   {node {9}
+            child   {node {3}}
+            child [missing]}
+    child   {node {19}
+            child  {node {14}
+                child   {node {12}}
+                child   [missing]}
+            child   {node {34}
+                    child {node {20}}
+                    child   {node {37}}}};
+\end{tikzpicture}
+
+
+
+
+
+
+% \paragraph{Step 3: Insert 12 \\}
+% \begin{tikzpicture}[%level distance=5mm,
+%         level 1/.style={level distance=10mm,sibling distance=24mm},
+%         level 2/.style={level distance=10mm,sibling distance=16mm},
+%         level 3/.style={level distance=10mm,sibling distance=16mm},
+%         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+%     \node {9}
+%     child [missing] % left child
+%     child   {node {10} % right child
+%             child [missing] % level 2
+%             child   {node {12}}};
+% \end{tikzpicture}
+
+% \paragraph{Step 4: Insert 14 \\}
+% \begin{tikzpicture}[%level distance=5mm,
+%         level 1/.style={level distance=10mm,sibling distance=24mm},
+%         level 2/.style={level distance=10mm,sibling distance=16mm},
+%         level 3/.style={level distance=10mm,sibling distance=16mm},
+%         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+%     \node {9}
+%     child [missing] % left child
+%     child   {node {10} % right child
+%             child [missing] % level 2
+%             child   {node {12} % level 2
+%                     child [missing] % level 3
+%                     child   {node {14}}}};
+% \end{tikzpicture}
+
+% \paragraph{Step 5: Insert 3 \\}
+% \begin{tikzpicture}[%level distance=5mm,
+%         level 1/.style={level distance=10mm,sibling distance=24mm},
+%         level 2/.style={level distance=10mm,sibling distance=16mm},
+%         level 3/.style={level distance=10mm,sibling distance=12mm},
+%         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+%     \node {9}
+%     child   {node {3} % left child
+%         }
+%     child   {node {10} % right child
+%             child [missing] % level 2
+%             child   {node {12} % level 2
+%                     child [missing] % level 3
+%                     child   {node {14}}}};
+% \end{tikzpicture}
+
+% \paragraph{Step 6: Insert 34 \\}
+% \begin{tikzpicture}[%level distance=5mm,
+%         level 1/.style={level distance=10mm,sibling distance=24mm},
+%         level 2/.style={level distance=10mm,sibling distance=16mm},
+%         level 3/.style={level distance=10mm,sibling distance=12mm},
+%         level 4/.style={level distance=10mm,sibling distance=8mm},
+%         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+%     \node {9}
+%     child   {node {3} % left child
+%         }
+%     child   {node {10} % right child
+%             child [missing] % level 2
+%             child   {node {12} % level 2
+%                     child [missing] % level 3
+%                     child   {node {14} % level 3
+%                             child [missing] % level 4
+%                             child   {node {34}}}}};
+% \end{tikzpicture}
+
+% \paragraph{Step 7: Insert 19 \\}
+% \begin{tikzpicture}[%level distance=5mm,
+%         level 1/.style={level distance=10mm,sibling distance=24mm},
+%         level 2/.style={level distance=10mm,sibling distance=16mm},
+%         level 3/.style={level distance=10mm,sibling distance=12mm},
+%         level 4/.style={level distance=10mm,sibling distance=8mm},
+%         level 5/.style={level distance=8mm,sibling distance=6mm},
+%         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+%     \node {9}
+%     child   {node {3} % left child
+%         }
+%     child   {node {10} % right child
+%             child [missing] % level 2
+%             child   {node {12} % level 2
+%                     child [missing] % level 3
+%                     child   {node {14} % level 3
+%                             child [missing] % level 4
+%                             child   {node {34} % level 4
+%                                     child   {node {19}} % level 5
+%                                     child   [missing]}}}};
+% \end{tikzpicture}
+
+% \paragraph{Step 8: Insert 37 \\}
+% \begin{tikzpicture}[%level distance=5mm,
+%         level 1/.style={level distance=10mm,sibling distance=24mm},
+%         level 2/.style={level distance=10mm,sibling distance=16mm},
+%         level 3/.style={level distance=10mm,sibling distance=12mm},
+%         level 4/.style={level distance=10mm,sibling distance=8mm},
+%         level 5/.style={level distance=8mm,sibling distance=6mm},
+%         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+%     \node {9}
+%     child   {node {3} % left child
+%         }
+%     child   {node {10} % right child
+%             child [missing] % level 2
+%             child   {node {12} % level 2
+%                     child [missing] % level 3
+%                     child   {node {14} % level 3
+%                             child [missing] % level 4
+%                             child   {node {34} % level 4
+%                                     child   {node {19}} % level 5
+%                                     child   {node {37}}}}}};
+% \end{tikzpicture}
+
+% \paragraph{Step 9: Insert 20 \\}
+% \begin{tikzpicture}[%level distance=5mm,
+%         level 1/.style={level distance=10mm,sibling distance=24mm},
+%         level 2/.style={level distance=10mm,sibling distance=16mm},
+%         level 3/.style={level distance=10mm,sibling distance=12mm},
+%         level 4/.style={level distance=10mm,sibling distance=8mm},
+%         level 5/.style={level distance=8mm,sibling distance=6mm},
+%         level 6/.style={level distance=8mm,sibling distance=6mm},
+%         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+%     \node {9}
+%     child   {node {3} % left child
+%         }
+%     child   {node {10} % right child
+%             child [missing] % level 2
+%             child   {node {12} % level 2
+%                     child [missing] % level 3
+%                     child   {node {14} % level 3
+%                             child [missing] % level 4
+%                             child   {node {34} % level 4
+%                                     child   {node {19} % level 5
+%                                             child [missing] % level 6
+%                                             child  {node {20}}} % level 6
+%                                     child   {node {37}}}}}};
+% \end{tikzpicture}
 
 $$ \blacksquare $$
 
@@ -491,13 +692,13 @@ $$ \blacksquare $$
 \begin{itemize}
     \item search(S, x): Return true if x is in S and false otherwise.
     \item insert(S, x): Insert the element x into the set S.
-        This operation has no effect if x is already in S.
+          This operation has no effect if x is already in S.
     \item \text{delete(S, x): Delete the element x from the set S. This operation has no effect if x is not in S.}
     \item min difference(S): Given a set S with size of at least 2, return a pair of distinct integers (x, y),
-        \newline
-        with x $\in$ S, y $\in$ S, with the minimum absolute difference, i.e.
-        \newline
-        $\forall x', \forall y', (x' \neq y' \rightarrow |x - y| \leq |x' - y'|)$
+          \newline
+          with x $\in$ S, y $\in$ S, with the minimum absolute difference, i.e.
+          \newline
+          $\forall x', \forall y', (x' \neq y' \rightarrow |x - y| \leq |x' - y'|)$
 \end{itemize}
 \paragraph{}
 Your task is to design a data structure to implement this ADT, \\
