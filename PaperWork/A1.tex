@@ -179,7 +179,7 @@ $ \text{where} \ \phi \text{ is the golden ratio.} $
             child   {node {12}}};
 \end{tikzpicture}
 \\
-Imbalanced. Right heavy. \\
+Imbalanced. Right heavy at node 9. \\
 Need a left rotation. \\
 Left rotation: \\\\
 \begin{tikzpicture}[%level distance=5mm,
@@ -242,7 +242,7 @@ Left rotation: \\\\
                     child   {node {34}}}};
 \end{tikzpicture}
 \\
-Imbalanced. Right heavy. \\
+Imbalanced. Right heavy at node 12. \\
 Need a left rotation. \\
 Left rotation: \\\\
 \begin{tikzpicture}[%level distance=5mm,
@@ -319,7 +319,7 @@ Left rotation: \\\\
                     child   {node {37}}}};
 \end{tikzpicture}
 \\
-Imbalanced. Right heavy. \\
+Imbalanced. Right heavy at node 14. \\
 Need a double rotation. \\
 1. Right rotation: \\\\
 \begin{tikzpicture}[%level distance=5mm,
@@ -356,8 +356,8 @@ Need a double rotation. \\
             child [missing]}
     child   {node {19}
             child  {node {14}
-                child   {node {12}}
-                child   [missing]}
+                    child   {node {12}}
+                    child   [missing]}
             child   {node {34}
                     child {node {20}}
                     child   {node {37}}}};
@@ -520,8 +520,7 @@ $$ \blacksquare $$
 \begin{tikzpicture}[
         level 1/.style={level distance=10mm,sibling distance=24mm},
         level 2/.style={level distance=10mm,sibling distance=16mm},
-        level 3/.style={level distance=10mm,sibling distance=12mm},
-        level 4/.style={level distance=10mm,sibling distance=8mm},
+        level 3/.style={level distance=8mm,sibling distance=10mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
     \node{d}
@@ -547,22 +546,10 @@ $$ \blacksquare $$
 \end{tikzpicture}
 
 \paragraph*{Step 1: Delete p \\}
-\text{Hold on, Latex is not a good fit for this question.}
-\newline
-\text{I will leave some space here for the hand-drawn tree.}
-\vfill{$$\blacksquare$$}
-\newpage
-
-% Q2-b-2
-\section*{Q2-b-2}
-\text{Q: }
-\paragraph*{On the tree shown below, show each step of deleting the keys p, d, h. \\}
-\text{\newline}
 \begin{tikzpicture}[
         level 1/.style={level distance=10mm,sibling distance=24mm},
         level 2/.style={level distance=10mm,sibling distance=16mm},
-        level 3/.style={level distance=10mm,sibling distance=12mm},
-        level 4/.style={level distance=10mm,sibling distance=8mm},
+        level 3/.style={level distance=8mm,sibling distance=10mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
     \node{d}
@@ -581,16 +568,104 @@ $$ \blacksquare $$
             child{
                     node{m}
                     child   {node{j}}
-                    child   {node{p}}
+                    child   [missing]
                 }
         };
+\end{tikzpicture}
+$$ \blacksquare $$
+\newpage
 
+% Q2-b-2
+\section*{Q2-b-2}
+\text{Q: }
+\paragraph*{On the tree shown below, show each step of deleting the keys p, d, h. \\}
+\text{\newline}
+\begin{tikzpicture}[
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=8mm,sibling distance=10mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node{d}
+    child   {
+            node{c}
+            child   {node{a}}
+            child   [missing]
+        }
+    child   {
+            node{i}
+            child   {
+                    node{h}
+                    child   {node{f}}
+                    child   [missing]
+                }
+            child{
+                    node{m}
+                    child   {node{j}}
+                    child   [missing]
+                }
+        };
 \end{tikzpicture}
 
-\paragraph*{Step 2: Delete d \\}
-\text{Hold on, Latex is not a good fit for this question.}
-\newline
-\text{I will leave some space here for the hand-drawn tree.}
+\paragraph{Step 2: Delete d \\}
+
+\text{1. Find the successor of d: \\}
+
+Which is the leftmost node in the right subtree of d, which is f.\\
+
+\text{2. Replace d with f}
+
+\begin{tikzpicture}[
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=8mm,sibling distance=10mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node{f}
+    child   {
+            node{c}
+            child   {node{a}}
+            child   [missing]
+        }
+    child   {
+            node{i}
+            child   {
+                    node{h}
+                    child   {node{f}}
+                    child   [missing]
+                }
+            child{
+                    node{m}
+                    child   {node{j}}
+                    child   [missing]
+                }
+        };
+\end{tikzpicture}
+
+\text{3. Delete f}
+
+\begin{tikzpicture}[
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=8mm,sibling distance=10mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node{f}
+    child   {
+            node{c}
+            child   {node{a}}
+            child   [missing]
+        }
+    child   {
+            node{i}
+            child   {node{h}}
+            child{
+                    node{m}
+                    child   {node{j}}
+                    child   [missing]
+                }
+        };
+\end{tikzpicture}
 
 \vfill{$$\blacksquare$$}
 \newpage
@@ -607,7 +682,7 @@ $$ \blacksquare $$
         level 4/.style={level distance=10mm,sibling distance=8mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
 
-    \node{d}
+    \node{f}
     child   {
             node{c}
             child   {node{a}}
@@ -615,25 +690,62 @@ $$ \blacksquare $$
         }
     child   {
             node{i}
-            child   {
-                    node{h}
-                    child   {node{f}}
-                    child   [missing]
-                }
+            child   {node{h}}
             child{
                     node{m}
                     child   {node{j}}
-                    child   {node{p}}
+                    child   [missing]
                 }
         };
-
 \end{tikzpicture}
-
 \paragraph*{Step 3: Delete h \\}
-\text{Hold on, Latex is not a good fit for this question.}
-\newline
-\text{I will leave some space here for the hand-drawn tree.}
-\vfill{$$\blacksquare$$}
+\begin{tikzpicture}[
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=10mm,sibling distance=12mm},
+        level 4/.style={level distance=10mm,sibling distance=8mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node{f}
+    child   {
+            node{c}
+            child   {node{a}}
+            child   [missing]
+        }
+    child   {
+            node{i}
+            child   [missing]
+            child{
+                    node{m}
+                    child   {node{j}}
+                    child   [missing]
+                }
+        };
+\end{tikzpicture}
+\\
+Imbalanced. Right heavy at node i. \\
+Need a left rotation. \\
+Left rotation: \\\\
+\begin{tikzpicture}[
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=16mm},
+        level 3/.style={level distance=10mm,sibling distance=12mm},
+        level 4/.style={level distance=10mm,sibling distance=8mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node{f}
+    child   {
+            node{c}
+            child   {node{a}}
+            child   [missing]
+        }
+    child   {
+            node{j}
+            child   {node{i}}
+            child   {node{m}}
+        };
+\end{tikzpicture}
+$$ \blacksquare $$
 \newpage
 
 % Q2-c
@@ -680,8 +792,138 @@ $$ \blacksquare $$
     \item [-] Show each step of deleting key 11.
 \end{itemize}
 
-\text{As usual, I will leave some space here for the hand-drawn tree.}
-\vfill{$$\blacksquare$$}
+\paragraph*{1. Insertion Sequence: (one possible sequence)}
+\begin{itemize}
+    \item Insert 8
+    \item Insert 5
+    \item Insert 11
+    \item Insert 3
+    \item Insert 7
+    \item Insert 10
+    \item Insert 12
+    \item Insert 2
+    \item Insert 4
+    \item Insert 6
+    \item Insert 9
+    \item Insert 1
+\end{itemize}
+The only constraint is the key 1 must be inserted last. $ \blacksquare $
+\newpage
+
+\paragraph{2. Delete key 11:}
+\subparagraph{Step 1: Find the seccessor of 11. \\}
+\text{The leftmost node in the right subtree of root, i.e. 9.}
+
+\subparagraph{Step 2: Replace 11 with 9. \\}
+\text{Replace 11 with 9:}
+
+\begin{tikzpicture}[
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=14 mm},
+        level 3/.style={level distance=10mm,sibling distance=8mm},
+        level 4/.style={level distance=8mm,sibling distance=4mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node{8}
+    child   {
+            node{5}
+            child   {
+                    node{3}
+                    child   {node{2}
+                            child {node{1}}
+                            child [missing]
+                        }
+                    child   {node{4}}
+                }
+            child   {node{7}
+                    child   {node{6}}
+                    child   [missing]
+                }
+        }
+    child   {
+            node{9}
+            child   {
+                    node{10}
+                    child   {node{9}}
+                    child   [missing]
+                }
+            child{node{12}}
+        };
+\end{tikzpicture}
+
+\subparagraph{Step 3: Delete 9. \\}
+\text{Delete 9:}
+
+\begin{tikzpicture}[
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=14 mm},
+        level 3/.style={level distance=10mm,sibling distance=8mm},
+        level 4/.style={level distance=8mm,sibling distance=4mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+
+    \node{8}
+    child   {
+            node{5}
+            child   {
+                    node{3}
+                    child   {node{2}
+                            child {node{1}}
+                            child [missing]
+                        }
+                    child   {node{4}}
+                }
+            child   {node{7}
+                    child   {node{6}}
+                    child   [missing]
+                }
+        }
+    child   {
+            node{9}
+            child   {
+                    node{10}
+                    child   [missing]
+                    child   [missing]
+                }
+            child{node{12}}
+        };
+\end{tikzpicture}
+\\
+Imbalanced. Left heavy at node 8. \\
+Need a right rotation. \\
+Right rotation: \\
+\begin{tikzpicture}[
+        level 1/.style={level distance=10mm,sibling distance=24mm},
+        level 2/.style={level distance=10mm,sibling distance=14 mm},
+        level 3/.style={level distance=10mm,sibling distance=8mm},
+        level 4/.style={level distance=8mm,sibling distance=4mm},
+        font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
+        
+        \node{5}
+        child   {
+                node{3}
+                child   {node{2}
+                        child {node{1}}
+                        child [missing]
+                    }
+                child   {node{4}}
+            }
+        child   {node{8}
+                child   {node{7}
+                        child   {node{6}}
+                        child   [missing]
+                    }
+                child   {node{9}
+                        child   {
+                                node{10}
+                                child   [missing]
+                                child   [missing]
+                            }
+                        child{node{12}}
+                    }
+            };
+\end{tikzpicture}
+$$ \blacksquare $$
+
 \newpage
 
 % Q4
@@ -712,6 +954,40 @@ where $n = |S|$. You will do so by augmenting our familiar AVL tree.
 \end{enumerate}
 
 \newpage
+
+\section*{A Evil Desing}
+\paragraph*{1. Describe all information that will be stored in the nodes. \\}
+\text{Given: A set S of distinct integers.}
+\newline
+\text{Also, the number of input must be finite. (In practical)}
+\newline
+\text{Also, we only discuss the time complexity, not the space complexity.}
+\newline
+\text{Then we come up with an evil design:}
+\newline
+\text{Say we have a bound for the value of the input, then we create a boolean array of size $n$}
+\paragraph{we put each input into the array, and use True to represent the input is in the set, False to represent the input is not in the set, and we use the value of the input as the index of the array.}
+\paragraph{Then it follows that the search, insert, and delete are all $\mathcal{O}(1)$}
+
+
+
+\begin{itemize}
+    \item 
+\end{itemize}
+
+$$ \blacksquare $$
+\newpage
+
+\paragraph*{1. Describe all information that will be stored in the nodes.}
+\begin{itemize}
+    \item int key;
+    \item void *data;
+    \item int height;
+    \item 
+\end{itemize}
+
+\newpage
+
 \mbox{}
 \vfill{$$\blacksquare$$}
 \end{document}
