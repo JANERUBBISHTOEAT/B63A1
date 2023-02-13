@@ -15,6 +15,7 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings}
 
 % Font size
 \usepackage{setspace}
@@ -897,30 +898,30 @@ Right rotation: \\
         level 3/.style={level distance=10mm,sibling distance=8mm},
         level 4/.style={level distance=8mm,sibling distance=4mm},
         font=\scriptsize,inner sep=2pt,every node/.style={draw,circle,minimum size=3ex}]
-        
-        \node{5}
-        child   {
-                node{3}
-                child   {node{2}
-                        child {node{1}}
-                        child [missing]
-                    }
-                child   {node{4}}
-            }
-        child   {node{8}
-                child   {node{7}
-                        child   {node{6}}
-                        child   [missing]
-                    }
-                child   {node{9}
-                        child   {
-                                node{10}
-                                child   [missing]
-                                child   [missing]
-                            }
-                        child{node{12}}
-                    }
-            };
+
+    \node{5}
+    child   {
+            node{3}
+            child   {node{2}
+                    child {node{1}}
+                    child [missing]
+                }
+            child   {node{4}}
+        }
+    child   {node{8}
+            child   {node{7}
+                    child   {node{6}}
+                    child   [missing]
+                }
+            child   {node{9}
+                    child   {
+                            node{10}
+                            child   [missing]
+                            child   [missing]
+                        }
+                    child{node{12}}
+                }
+        };
 \end{tikzpicture}
 $$ \blacksquare $$
 
@@ -936,7 +937,7 @@ $$ \blacksquare $$
     \item insert(S, x): Insert the element x into the set S.
           This operation has no effect if x is already in S.
     \item \text{delete(S, x): Delete the element x from the set S. This operation has no effect if x is not in S.}
-    \item min difference(S): Given a set S with size of at least 2, return a pair of distinct integers (x, y),
+    \item min\_difference(S): Given a set S with size of at least 2, return a pair of distinct integers (x, y),
           \newline
           with x $\in$ S, y $\in$ S, with the minimum absolute difference, i.e.
           \newline
@@ -955,39 +956,335 @@ where $n = |S|$. You will do so by augmenting our familiar AVL tree.
 
 \newpage
 
-\section*{A Evil Desing}
-\paragraph*{1. Describe all information that will be stored in the nodes. \\}
-\text{Given: A set S of distinct integers.}
-\newline
-\text{Also, the number of input must be finite. (In practical)}
-\newline
-\text{Also, we only discuss the time complexity, not the space complexity.}
-\newline
-\text{Then we come up with an evil design:}
-\newline
-\text{Say we have a bound for the value of the input, then we create a boolean array of size $n$}
-\paragraph{we put each input into the array, and use True to represent the input is in the set, False to represent the input is not in the set, and we use the value of the input as the index of the array.}
-\paragraph{Then it follows that the search, insert, and delete are all $\mathcal{O}(1)$}
+% \section*{An Evil Desing}
+% \paragraph*{1. Describe all information that will be stored in the nodes. \\}
+% \text{Given: A set S of distinct integers.}
+% \newline
+% \text{Also, the number of input must be finite. (In practical)}
+% \newline
+% \text{Also, we only discuss the time complexity, not the space complexity.}
+% \newline
+% \text{Then we come up with an evil design:}
+% \newline
+% \text{Say we have a bound for the value of the input, then we create a boolean array of size $n$}
+% \paragraph{we put each input into the array, and use True to represent the input is in the set, False to represent the input is not in the set, and we use the value of the input as the index of the array.}
+% \paragraph{Then it follows that the search, insert, and delete are all $\mathcal{O}(1)$}
 
 
+% \paragraph*{1. Describe all information that will be stored in the nodes. (here the nodes is the elements of the array $S$)}
+% \begin{itemize}
+%     \item boolean is\_in\_set;
+%     \item void *data;
+% \end{itemize}
+% \text{Extra information stored in a stack $T$:}
+% \begin{itemize}
+%     \item int min\_diff;
+%     \item int index\_x;
+%     \item int index\_y;
+% \end{itemize}
 
-\begin{itemize}
-    \item 
-\end{itemize}
+% \paragraph*{2. Provide pseudo-code for each required operation.}
+% \begin{itemize}
+%     \item search(S, x): Return true if x is in S and false otherwise.
+%     \begin{lstlisting}
+%         return S[x]; // O(1)
+%     \end{lstlisting}
 
-$$ \blacksquare $$
-\newpage
+%     \item insert(S, x): Insert the element x into the set S.
+%           This operation has no effect if x is already in S.
+%     \begin{lstlisting}
+%         S[x] = True;
+%         int pos_l = x;
+%         int pos_r = x;
 
+%         while (S[--pos_l] == False); // O(1), constant
+%         while (S[++pos_r] == False); // O(1), constant
+%         int diff_l = x - pos_l;
+%         int diff_r = pos_r - x;
+
+%         int diff = MIN(diff_l, diff_r);
+%         int pos = (diff_l < diff_r) ? pos_l : pos_r;
+
+%         if (diff < T.top.min_diff) {
+%             T.push(diff, pos, x);
+%         }
+
+%     \end{lstlisting}
+
+%     \item \text{delete(S, x): Delete the element x from the set S. This operation has no effect if x is not in S.}
+%     \begin{lstlisting}
+%         S[x] = False;
+
+%         if (T.top.index_x == x) {
+%             T.pop();
+%         }
+%         else if (T.top.index_y == x) {
+%             T.pop();
+%         }
+%         else {
+%             list = T.find(x);
+%             for i in list:
+%                 T.
+%                 // Bad design, must exceed the time complexity
+%         }
+
+
+%     \end{lstlisting}
+
+%     \item min\_difference(S): Given a set S with size of at least 2, return a pair of distinct integers (x, y),
+%           \newline
+%           with x $\in$ S, y $\in$ S, with the minimum absolute difference, i.e.
+%           \newline
+%           $\forall x', \forall y', (x' \neq y' \rightarrow |x - y| \leq |x' - y'|)$
+%     \begin{lstlisting}
+%         return T.top.min_diff;
+%     \end{lstlisting}
+% \end{itemize}
+
+% $$ \blacksquare $$
+% \newpage
+
+\section*{Augmented AVL Tree}
 \paragraph*{1. Describe all information that will be stored in the nodes.}
 \begin{itemize}
     \item int key;
     \item void *data;
     \item int height;
-    \item 
+    \item node *left;
+    \item node *right;
+    \item int relative\_min\_diff; // augmented information
+    \item tuple (x, y) min\_pair; // augmented information
+          % \item node *parent; // augmented information
+\end{itemize}
+
+*Note that here 2 augmented information are introduced:
+
+\begin{itemize}
+    \item relative\_min\_diff: the min difference in the subtree at the node.
+    \item min\_pair: the pair of integers with the minimum difference in the subtree at the node.
 \end{itemize}
 
 \newpage
 
-\mbox{}
-\vfill{$$\blacksquare$$}
+\paragraph*{2. Provide pseudo-code for each required operation.}
+\begin{itemize}
+    \item search(S, x): Return true if x is in S and false otherwise.
+          \begin{lstlisting}
+        return BST_search(S, x);
+        // Where BST_search is the search function of a BST
+        // See below:
+        def BST_search(S, x):
+            if S == NULL:
+                return False
+            if x == S.key:
+                return True
+            else:
+                if x < S.key:
+                    return BST_search(S.left, x)
+                else:
+                    return BST_search(S.right, x)
+    \end{lstlisting}
+
+          \newpage
+
+    \item insert(S, x): Insert the element x into the set S.
+          This operation has no effect if x is already in S.
+          \begin{lstlisting}
+        def insert(S, x):
+            if S == NULL:
+                S = new node
+                S.key = x
+                S.left = NULL
+                S.right = NULL
+                return S
+            if x == S.key:
+                return S
+            else:
+                if x < S.key:
+                    S.left = insert(S.left, x)
+                else:
+                    S.right = insert(S.right, x)
+            
+            update_height(S) // The same as AVL tree
+            S = balance(S) // The same as AVL tree
+            update_min_diff(S) // See helper functions below
+            return S
+    \end{lstlisting}
+
+          \newpage
+
+    \item delete(S, x): Delete the element x from the set S.
+          This operation has no effect if x is not in S.
+          \begin{lstlisting}
+        def delete(S, x):
+            if S == NULL:
+                return S
+            if x == S.key:
+                if S.left == NULL and S.right == NULL:
+                    return NULL
+                if S.left == NULL:
+                    return S.right
+                if S.right == NULL:
+                    return S.left
+                else:
+                    S.key = find_min(S.right)
+                    S.right = delete(S.right, S.key)
+            else:
+                if x < S.key:
+                    S.left = delete(S.left, x)
+                else:
+                    S.right = delete(S.right, x)
+            
+            update_height(S) // The same as AVL tree
+            S = balance(S) // The same as AVL tree
+            update_min_diff(S) // See helper functions below
+            return S
+    \end{lstlisting}
+
+          \newpage
+
+    \item min\_difference(S): Given a set S with size of at least 2, return a pair of distinct integers (x, y),
+          \newline
+          with x $\in$ S, y $\in$ S, with the minimum absolute difference, i.e.
+          \newline
+          $\forall x', \forall y', (x' \neq y' \rightarrow |x - y| \leq |x' - y'|)$
+          \begin{lstlisting}
+        def min_difference(S):
+            return S.min_pair
+    \end{lstlisting}
+\end{itemize}
+
+\paragraph*{Helper functions}
+
+\begin{itemize}
+    \item update\_height(S): Update the height of the node S.
+          $ \mathcal{O}(1) $ time complexity.
+          \begin{lstlisting}
+        def height(S):
+            if S == NULL:
+                return -1
+            else:
+                return S.height
+
+        def update_height(S):
+            S.height = 1 + max(height(S.left), height(S.right))
+    \end{lstlisting}
+
+    \item balance(S): Balance the node S.
+          $ \mathcal{O}(1) $ time complexity.
+          \begin{lstlisting}
+        def balance(S):
+            if S == NULL:
+                return S
+            if height(S.left) - height(S.right) > 1:
+                if height(S.left.left) >= height(S.left.right):
+                    S = rotate_right(S)
+                else:
+                    S.left = rotate_left(S.left)
+                    S = rotate_right(S)
+            else if height(S.right) - height(S.left) > 1:
+                if height(S.right.right) >= height(S.right.left):
+                    S = rotate_left(S)
+                else:
+                    S.right = rotate_right(S.right)
+                    S = rotate_left(S)
+            return S
+    \end{lstlisting}
+
+    \item update\_min\_diff(S): Update the augmented information of the node S.
+
+          $ \mathcal{O}(1) $ time complexity.
+          \begin{lstlisting}
+        def update_min_diff(S):
+            if S == NULL:
+                return
+            if S.left == NULL and S.right == NULL:
+                S.relative_min_diff = MAX_INT
+// It it more understandable to use 0 since the difference is always positive.
+// But we need to use MAX_INT for the ease of implementation.
+// Actually, `if S.left.relative_min_diff <= S.right.relative_min_diff:'
+                S.min_pair = (NULL, NULL)
+                return
+            if S.left == NULL:
+                S.relative_min_diff = S.right.relative_min_diff
+                S.min_pair = S.right.min_pair
+                return
+            if S.right == NULL:
+                S.relative_min_diff = S.left.relative_min_diff
+                S.min_pair = S.left.min_pair
+                return
+            
+            if S.left.relative_min_diff <= S.right.relative_min_diff:
+                S.relative_min_diff = S.left.relative_min_diff
+                S.min_pair = S.left.min_pair
+            else:
+                S.relative_min_diff = S.right.relative_min_diff
+                S.min_pair = S.right.min_pair
+            
+            return S
+    \end{lstlisting}
+\end{itemize}
+
+$$ \blacksquare $$
+\newpage
+
+\paragraph*{3. Justify why your algorithms are correct and why they achieve the required time bound.}
+
+\section*{Proof of correctness}
+
+\begin{itemize}
+    \item search(S, x): The search function of a AVL is correct,
+          and the introduced helper function `update\_min\_diff()' does not change the correctness of the search function.
+    \item insert(S, x): The insert function of a AVL is correct,
+          and the introduced helper function `update\_min\_diff()' are correct.
+    \item delete(S, x): The delete function of a AVL is correct,
+          and the introduced helper function `update\_min\_diff()' are correct.
+    \item min\_difference(S): It basically returns a value stored in the input node.
+          To prove the correctness of this function, we need to prove that the value stored in the input node is correct,
+          which will be proved in the proof of the `update\_min\_diff()' function.
+    \item update\_min\_diff(S): The correctness of this function is based on the following two facts:
+          \begin{enumerate}
+              \item $\left[Base\ Case\right]$ If the node S is a leaf node, then the value stored in S is correct.
+                    \begin{itemize}
+                        \item The value stored in S is the minimum absolute difference of the set S,
+                              where the set S is a set with only one element, so the minimum absolute difference of the set S is
+                              a special case of the minimum absolute difference of a set, which is defined as $MAX\_INT$
+                              (because the real minimum absolute difference is always greater than $MAX\_INT$ in a set of distinct integers).
+                        \item Therefore, the value stored in S is correct.
+                    \end{itemize}
+
+              \item  $\left[I.H.\right]$ The value stored in the node S is correct.
+
+              \item $\left[I.S.\right]$ Prove: the value stored in the parent node of S is correct. \\
+                    Let S' be the parent node of S, and let S\_L and S\_R be the left child and right child of S' respectively.
+                    \begin{itemize}
+                        \item The value of S\_L.relative\_min\_diff is the minimum absolute difference of the set S\_L.
+                        \item The value of S\_R.relative\_min\_diff is the minimum absolute difference of the set S\_R.
+                        \item The value of S'.relative\_min\_diff is the minimum of S\_L.relative\_min\_diff and S\_R.relative\_min\_diff.
+                        \item $\Rightarrow$ The value of S'.relative\_min\_diff is the minimum absolute difference of both subset S\_L and S\_R.
+                        \item $\Rightarrow$ The value of S'.relative\_min\_diff is the minimum absolute difference of the set S'.
+                        \item $\Rightarrow$ The value of S'.relative\_min\_diff is correct.
+                    \end{itemize}
+          \end{enumerate}
+\end{itemize}
+$$ \blacksquare $$
+
+\section*{Proof of time complexity}
+
+\begin{itemize}
+    \item search(S, x): O(log n) because the search function of a AVL is O(log n),
+          and the introduced helper functions are O(1).
+    \item insert(S, x): O(log n) because the insert function of a AVL is O(log n),
+          and the introduced helper functions are O(1).
+    \item delete(S, x): O(log n) because the delete function of a AVL is O(log n),
+          and the introduced helper functions are O(1).
+    \item min\_difference(S): O(1) because it basically returns a value stored in the input node.
+\end{itemize}
+Above are the time complexities of the four functions, which are all within O(log n).
+$$ \blacksquare $$
+
+
+
+% \mbox{}
+% \vfill{$$\blacksquare$$}
 \end{document}
